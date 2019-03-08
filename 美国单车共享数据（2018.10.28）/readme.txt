@@ -1,0 +1,6 @@
+（python--利用datetime模块计算时间差）[https://blog.csdn.net/wo1182929447/article/details/77841529]
+（ValueError: Invalid file path or buffer object type: <class 'tkinter.StringVar'>）[https://stackoverflow.com/questions/49468065/valueerror-invalid-file-path-or-buffer-object-type-class-tkinter-stringvar]
+（Python使用笔记：时间的运算timedelta)[http://sparkandshine.net/python-use-notes-time-computions/]
+(使用Pandas获得数据的时间间隔序列)[http://blog.sina.com.cn/s/blog_4ddef8f80102vtun.html]
+(对于Python异常处理慎用“except:pass”建议)[https://www.jb51.net/article/63364.htm]
+(Python异常处理 -跳过异常继续执行)[https://blog.csdn.net/Sero_Qu/article/details/53164016]
