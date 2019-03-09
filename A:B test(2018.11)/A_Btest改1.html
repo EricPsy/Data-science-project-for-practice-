@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>A_Btest-Copy1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>A_Btest改1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <style type="text/css">
@@ -11775,7 +11775,15 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#20998;&#26512;A/B&#27979;&#35797;&#32467;&#26524;">&#20998;&#26512;A/B&#27979;&#35797;&#32467;&#26524;<a class="anchor-link" href="#&#20998;&#26512;A/B&#27979;&#35797;&#32467;&#26524;">&#182;</a></h2><p>这个项目可以帮你确认你已经掌握了统计课程中涵盖的所有内容。 希望这个项目尽可能地涵盖所有内容。 祝你好运！</p>
+<h3 id="&#31616;&#20171;">&#31616;&#20171;<a class="anchor-link" href="#&#31616;&#20171;">&#182;</a></h3><p>在这个项目中，设定了一个虚拟电子商务网站运营 A/B 测试的情境。该公司设计了新网站启动页面，想提高用户转化率，即购买公司产品的用户数量。我的目标是通过分析来帮助公司决定他们是否应该使用新页面，还是保留原有网页或延长测试时间来进一步观测。数据集描述如下:<br>
+user_id:用户名<br>
+timestamp：时间<br>
+group：分为两类（control、treatment）control即原来的页面，treatment组是新的测试页面<br>
+landing_page：载入页面，分页面和旧页面两种<br>
+converted：即用户转化率</p>
+<p>数据来源：优达学城数据分析课程项目五。</p>
+<h2 id="&#30446;&#30340;">&#30446;&#30340;<a class="anchor-link" href="#&#30446;&#30340;">&#182;</a></h2><p>通过这个项目练习一些基本的描述统计、推断统计及作图。</p>
+<h2 id="&#27880;&#24847;">&#27880;&#24847;<a class="anchor-link" href="#&#27880;&#24847;">&#182;</a></h2><p>A/B test并不是一种严格意义上的实验设计（并没有对其他的额外变量以及变量间的交互作用进行严格控制），因此，描述的信息并不是严格意义上的因果关系，更多的是一种相关关系。因此，以下推断统计的结果都是在假定其他变量并没有发生显著变化的前提下进行推断，所描述的结果只是时间上的前后关系，而非真正的因果关系。<strong>如果有用户的其他数据集，我们可以结合其他数据集进行进一步推算来排除一些额外变量的干扰：比如两组用户的行为习惯是否本来就存在差异；比如测试时间段内，两组用户的购买力是否有明显的变化等。</strong></p>
 <h2 id="&#30446;&#24405;">&#30446;&#24405;<a class="anchor-link" href="#&#30446;&#24405;">&#182;</a></h2><ul>
 <li><a href="#intro">简介</a></li>
 <li><a href="#probability">I - 概率</a></li>
@@ -11783,11 +11791,6 @@ div#notebook {
 <li><a href="#regression">III - 回归</a></li>
 </ul>
 <p><a id='intro'></a></p>
-<h3 id="&#31616;&#20171;">&#31616;&#20171;<a class="anchor-link" href="#&#31616;&#20171;">&#182;</a></h3><p>通常情况下，A/B 测试由数据分析师和数据科学家来完成。如果你在一些实践工作中遇到过这方面的问题，那学习起来就会更加游刃有余。</p>
-<p>对于这个项目，你将要了解的是电子商务网站运行的 A/B 测试的结果。你的目标是通过这个 notebook 来帮助公司弄清楚他们是否应该使用新的页面，保留旧的页面，或者应该将测试时间延长，之后再做出决定。</p>
-<p><strong>使用该 notebook 的时候，请同步学习课堂内容，并回答与每个问题相关的对应测试题目。</strong> 每个课堂概念的标签对应每个题目。这样可以确保你在完成项目的过程中的方法正确，并且你最终提交的内容会更加符合标准，不必担心出现错误。最后检查的时候，请确保你的提交内容符合 <a href="https://review.udacity.com/#!/projects/37e27304-ad47-4eb0-a1ab-8c12f60e43d0/rubric">审阅标准</a> 中的所有标准。</p>
-<p><a id='probability'></a></p>
-<h4 id="I---&#27010;&#29575;">I - &#27010;&#29575;<a class="anchor-link" href="#I---&#27010;&#29575;">&#182;</a></h4><p>让我们先导入库，然后开始你的任务吧。</p>
 
 </div>
 </div>
@@ -11802,7 +11805,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="c1">#We are setting the seed to assure you get the same answers on quizzes as we set up</span>
+<span class="c1">#设定随机种子，使得每一运行时结果一致</span>
 <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 
@@ -11815,7 +11818,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>1.</code> 现在，导入 <code>ab_data.csv</code> 数据，并将其存储在 <code>df</code> 中。  <strong>使用你的 dataframe 来回答课堂测试 1 中的问题。</strong></p>
+<p><code>1.</code> 导入 <code>ab_data.csv</code> 数据，并将其存储在 <code>df</code> 中。</p>
 <p>a. 导入数据集，并在这里查看前几行：</p>
 
 </div>
@@ -11910,7 +11913,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>b. 使用下面的单元格来查找数据集中的行数。</p>
+<p>b. 查看数据行列数量</p>
 
 </div>
 </div>
@@ -11952,7 +11955,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>c. 数据集中独立用户的数量。</p>
+<p>c. 数据集中“独立用户”的数量：有时候一个用户会有多组数据。通过nunique来判断到底有多少用户</p>
 
 </div>
 </div>
@@ -11994,7 +11997,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>d. 用户转化的比例。</p>
+<p>d. 用户转化的比例：0表示未转化，1表示转化。通过平均可以算出转化率</p>
 
 </div>
 </div>
@@ -12036,7 +12039,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>e.  <code>new_page</code> 与 <code>treatment</code> 不一致的次数。</p>
+<p>e.  <code>new_page</code> 与 <code>treatment</code> 不一致的次数：new_page是对应treatment条件的，如果不是，那么数据可能存在一些问题</p>
 
 </div>
 </div>
@@ -12126,8 +12129,8 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>2.</code> 对于 <strong>treatment</strong> 不与 <strong>new_page</strong> 一致的行或 <strong>control</strong> 不与 <strong>old_page</strong> 一致的行，我们不能确定该行是否真正接收到了新的或旧的页面。我们应该如何处理这些行？在课堂中的 <strong>测试 2</strong> 中，给出你的答案。</p>
-<p>a. 现在，使用测试题的答案创建一个符合测试规格要求的新数据集。将新 dataframe 存储在 <strong>df2</strong> 中。</p>
+<p><code>2.</code> 对于 <strong>treatment</strong> 不与 <strong>new_page</strong> 一致的行或 <strong>control</strong> 不与 <strong>old_page</strong> 一致的行，我们不能确定该行是否真正接收到了新的或旧的页面。因此，我们再接下来的分析中，排除这些数据，只选取有用的数据。</p>
+<p>a. 现在，创建一个符合测试规格要求的新数据集。将新 dataframe 存储在 <strong>df2</strong> 中。</p>
 
 </div>
 </div>
@@ -12216,8 +12219,7 @@ dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>3.</code> 使用 <strong>df2</strong> 与下面的单元格来回答课堂中的 <strong>测试3</strong> 。</p>
-<p>a.  <strong>df2</strong> 中有多少唯一的 <strong>user_id</strong>?</p>
+<p><code>3.</code> 查看更新后的数据集的一些基本信息</p>
 
 </div>
 </div>
@@ -12254,15 +12256,6 @@ dtype: int64</pre>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>b.  <strong>df2</strong> 中有一个重复的 <strong>user_id</strong> 。它是什么？</p>
-
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -12302,7 +12295,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>c. 这个重复的  <strong>user_id</strong> 的行信息是什么？</p>
+<p>c. 查看这个重复的  <strong>user_id</strong> 的信息</p>
 
 </div>
 </div>
@@ -12387,7 +12380,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>d. 删除 <strong>一个</strong> 含有重复的 <strong>user_id</strong> 的行， 但需要确保你的 dataframe 为 <strong>df2</strong>。</p>
+<p>d. 删除 <strong>一个</strong> 含有重复的 <strong>user_id</strong> 的行。</p>
 
 </div>
 </div>
@@ -12442,8 +12435,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>4.</code> 在下面的单元格中，使用 <strong>df2</strong> 来回答与课堂中的 <strong>测试 4</strong> 相关的测试题目。</p>
-<p>a. 不管它们收到什么页面，单个用户的转化率是多少？</p>
+<p><code>4.</code> 接下来分别查看用户的总体转换率以及各组用户(control,treatment)的转化率</p>
 
 </div>
 </div>
@@ -12485,7 +12477,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>b. 假定一个用户处于 <code>control</code> 组中，他的转化率是多少？</p>
+<p>b.  <code>control</code> 组中用户的的转化率：</p>
 
 </div>
 </div>
@@ -12528,7 +12520,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>c. 假定一个用户处于 <code>treatment</code> 组中，他的转化率是多少？</p>
+<p>c. <code>treatment</code> 组用户的转化率：</p>
 
 </div>
 </div>
@@ -12571,7 +12563,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>d. 一个用户收到新页面的概率是多少？</p>
+<p>d. 一个用户收到新页面的概率：</p>
 
 </div>
 </div>
@@ -12613,7 +12605,6 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>e. 使用这个问题的前两部分的结果，给出你的建议：你是否认为有证据表明一个页面可以带来更多的转化？在下面写出你的答案。</p>
 <p>由上面数据可以知道，两组的人数接近（用户接收到新页面的概率为0.5），Treatment组(M=0.119)的转化率比control组(M=0.120)稍微低一些，但是由于没有进行推断统计，<strong>所以并没有明显的证据证明一个页面可以带来更多的转化。</strong></p>
 
 </div>
@@ -12624,10 +12615,7 @@ Name: user_id, dtype: int64</pre>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a id='ab_test'></a></p>
-<h3 id="II---A/B-&#27979;&#35797;">II - A/B &#27979;&#35797;<a class="anchor-link" href="#II---A/B-&#27979;&#35797;">&#182;</a></h3><p>请注意，由于与每个事件相关的时间戳，你可以在进行每次观察时连续运行假设检验。</p>
-<p>然而，问题的难点在于，一个页面被认为比另一页页面的效果好得多的时候你就要停止检验吗？还是需要在一定时间内持续发生？你需要将检验运行多长时间来决定哪个页面比另一个页面更好？</p>
-<p>一般情况下，这些问题是A / B测试中最难的部分。如果你对下面提到的一些知识点比较生疏，请先回顾课程中的“描述统计学”部分的内容。</p>
-
+<h3 id="II---A/B-&#27979;&#35797;">II - A/B &#27979;&#35797;<a class="anchor-link" href="#II---A/B-&#27979;&#35797;">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -12635,7 +12623,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>1.</code> 现在，你要考虑的是，你需要根据提供的所有数据做出决定。如果你想假定旧的页面效果更好，除非新的页面在类型I错误率为5％的情况下才能证明效果更好，那么，你的零假设和备择假设是什么？ 你可以根据单词或旧页面与新页面的转化率 <strong>$p_{old}$</strong> 与 <strong>$p_{new}$</strong> 来陈述你的假设。</p>
+<p><code>1.</code> 我的假设是新页面的用户转化率<strong>$p_{new}$</strong> 会大于旧页面 <strong>$p_{old}$</strong> 的用户转化率。</p>
 
 </div>
 </div>
@@ -12665,8 +12653,7 @@ Name: user_id, dtype: int64</pre>
 <p><code>2.</code> 假定在零假设中，不管是新页面还是旧页面， $p_{new}$ and $p_{old}$ 都具有等于 <strong>转化</strong> 成功率的“真”成功率，也就是说，  $p_{new}$ 与 $p_{old}$ 是相等的。此外，假设它们都等于<strong>ab_data.csv</strong> 中的 <strong>转化</strong> 率，新旧页面都是如此。  <br><br></p>
 <p>每个页面的样本大小要与 <strong>ab_data.csv</strong> 中的页面大小相同。  <br><br></p>
 <p>执行两次页面之间 <strong>转化</strong> 差异的抽样分布，计算零假设中10000次迭代计算的估计值。  <br><br></p>
-<p>使用下面的单元格提供这个模拟的必要内容。如果现在还没有完整的意义，不要担心，你将通过下面的问题来解决这个问题。你可以通过做课堂中的 <strong>测试 5</strong> 来确认你掌握了这部分内容。<br><br></p>
-<p>a. 在零假设中，$p_{new}$ 的 <strong>convert rate（转化率）</strong> 是多少？</p>
+<p>a. 在零假设中，$p_{new}$ 的 <strong>convert rate（转化率）</strong> ：</p>
 
 </div>
 </div>
@@ -12709,7 +12696,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>b. 在零假设中， $p_{old}$  的 <strong>convert rate（转化率）</strong> 是多少？ <br><br></p>
+<p>b. 在零假设中， $p_{old}$  的 <strong>convert rate（转化率）</strong> ：<br><br></p>
 
 </div>
 </div>
@@ -12838,7 +12825,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>e. 在零假设中，使用 $p_{new}$ 转化率模拟 $n_{new}$ 交易，并将这些 $n_{new}$ 1's 与 0's 存储在 <strong>new_page_converted</strong> 中。(提示：可以使用  <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html">numpy.random.choice</a>。)</p>
+<p>e. 在零假设中，使用 $p_{new}$ 转化率模拟 $n_{new}$ 交易，并将这些 $n_{new}$ 1's 与 0's 存储在 <strong>new_page_converted</strong> 中。( <a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html">numpy.random.choice</a>。)</p>
 
 </div>
 </div>
@@ -12993,7 +12980,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>i. 绘制一个 <strong>p_diffs</strong> 直方图。这个直方图看起来像你所期望的吗？通过回答课堂上的匹配问题，确保你完全理解这里计算出的内容。</p>
+<p>i. 绘制一个 <strong>p_diffs</strong> 直方图：</p>
 
 </div>
 </div>
@@ -13056,7 +13043,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>j.  在<strong>p_diffs</strong>列表的数值中，有多大比例大于 <strong>ab_data.csv</strong> 中观察到的实际差值？</p>
+<p>j.  查看在<strong>p_diffs</strong>列表的数值中，大于 <strong>ab_data.csv</strong> 中观察到的实际差值的比例：</p>
 
 </div>
 </div>
@@ -13194,7 +13181,6 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>k. 用文字解释一下你刚才在 <strong>j.</strong>中计算出来的结果。在科学研究中，这个值是什么？ 根据这个数值，新旧页面的转化率是否有区别呢？</p>
 <p><strong>1.由结果可知，当抽样分布的均值为0时，样本中比我们观察到的统计量大的值，占了样本的91.31%。即统计量仍处于零假设的区间内。如果零假设正确，抽取到统计量所在样本的概率很大。因此，我们并不能拒绝零假设。</strong></p>
 <p><strong>2. 在科学研究中，这个值时P值。p值为0.91， 表示我们并不能拒绝零假设。即新旧页面的转化率没有显著差异。</strong></p>
 
@@ -13205,7 +13191,8 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>l. 我们也可以使用一个内置程序 （built-in）来实现类似的结果。尽管使用内置程序可能更易于编写代码，但上面的内容是对正确思考统计显著性至关重要的思想的一个预排。填写下面的内容来计算每个页面的转化次数，以及每个页面的访问人数。使用 <code>n_old</code> 与 <code>n_new</code> 分别引证与旧页面和新页面关联的行数。</p>
+<p>l. 我们也可以使用一个内置程序 （built-in）来实现类似的结果。<br>
+首先来计算每个页面的转化次数，以及每个页面的访问人数。使用 <code>n_old</code> 与 <code>n_new</code> 分别引证与旧页面和新页面关联的行数。</p>
 
 </div>
 </div>
@@ -13302,7 +13289,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>m. 现在使用 <code>stats.proportions_ztest</code> 来计算你的检验统计量与 p-值。<a href="http://knowledgetack.com/python/statsmodels/proportions_ztest/">这里</a> 是使用内置程序的一个有用链接。</p>
+<p>m. 现在使用 <code>stats.proportions_ztest</code> 来计算检验统计量与 p-值。<a href="http://knowledgetack.com/python/statsmodels/proportions_ztest/">内置程序的使用说明</a></p>
 
 </div>
 </div>
@@ -13358,8 +13345,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>n. 根据上题算出的 z-score 和 p-value，我们认为新旧页面的转化率是否有区别？它们与 <strong>j.</strong> 与 <strong>k.</strong> 中的结果一致吗？</p>
-<p><strong>根据上面的结果可以知道，p值为0.905， 不能拒绝零假设。即新旧页面转换率没有区别。</strong>该结果与j. 与 k. 中的结果一致。</p>
+<p><strong>根据上面的结果可以知道，p值为0.905， 不能拒绝零假设。即新旧页面转换率没有区别。</strong>该结果与j中的结果一致。</p>
 
 </div>
 </div>
@@ -13369,9 +13355,8 @@ Name: user_id, dtype: int64</pre>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a id='regression'></a></p>
-<h3 id="III---&#22238;&#24402;&#20998;&#26512;&#27861;&#20043;&#19968;">III - &#22238;&#24402;&#20998;&#26512;&#27861;&#20043;&#19968;<a class="anchor-link" href="#III---&#22238;&#24402;&#20998;&#26512;&#27861;&#20043;&#19968;">&#182;</a></h3><p><code>1.</code> 在最后一部分中，你会看到，你在之前的A / B测试中获得的结果也可以通过执行回归来获取。<br><br></p>
-<p>a. 既然每行的值是转化或不转化，那么在这种情况下，我们应该执行哪种类型的回归？</p>
-<p><strong>二分变量，用逻辑回归</strong></p>
+<h3 id="III---&#22238;&#24402;&#20998;&#26512;&#27861;&#20043;&#19968;">III - &#22238;&#24402;&#20998;&#26512;&#27861;&#20043;&#19968;<a class="anchor-link" href="#III---&#22238;&#24402;&#20998;&#26512;&#27861;&#20043;&#19968;">&#182;</a></h3><p><code>1.</code> 之前的A / B测试中获得的结果也可以通过执行回归来获取。<br><br></p>
+<p>a. 既然每行的值是转化或不转化，是一个二分变量，那么我们可以用<strong>逻辑回归</strong>来实现</p>
 
 </div>
 </div>
@@ -13380,7 +13365,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>b. 目标是使用 <strong>statsmodels</strong> 来拟合你在 <strong>a.</strong> 中指定的回归模型，以查看用户收到的不同页面是否存在显著的转化差异。但是，首先，你需要为这个截距创建一个列（ 原文：column） ，并为每个用户收到的页面创建一个虚拟变量列。添加一个 <strong>截距</strong> 列，一个 <strong>ab_page</strong> 列，当用户接收 <strong>treatment</strong> 时为1， <strong>control</strong> 时为0。</p>
+<p>b. 目标是使用 <strong>statsmodels</strong> 来拟合 <strong>a.</strong> 中指定的回归模型，以查看用户收到的不同页面是否存在显著的转化差异。但是，首先，需要为这个截距创建一个列（ 原文：column） ，并为每个用户收到的页面创建一个虚拟变量列。添加一个 <strong>截距</strong> 列，一个 <strong>ab_page</strong> 列，当用户接收 <strong>treatment</strong> 时为1， <strong>control</strong> 时为0。</p>
 
 </div>
 </div>
@@ -13504,7 +13489,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>c. 使用 <strong>statsmodels</strong> 导入你的回归模型。 实例化该模型，并使用你在 <strong>b.</strong> 中创建的2个列来拟合该模型，用来预测一个用户是否会发生转化。</p>
+<p>c. 使用 <strong>statsmodels</strong> 导入回归模型。 实例化该模型，并使用 <strong>b.</strong> 中创建的2个列来拟合该模型，用来预测一个用户是否会发生转化。</p>
 
 </div>
 </div>
@@ -13547,7 +13532,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>d. 请在下方提供你的模型摘要，并根据需要使用它来回答下面的问题。</p>
+<p>d. <strong>查看模型摘要：</strong></p>
 
 </div>
 </div>
@@ -13636,7 +13621,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>e. 与 <strong>ab_page</strong> 关联的 p-值是多少？ 为什么它与你在 <strong>II</strong> 中发现的结果不同？<br><br>  <strong>提示</strong>: 与你的回归模型相关的零假设与备择假设分别是什么？它们如何与 <strong>Part II</strong> 中的零假设和备择假设做比较？</p>
+<p>e. 基本结果描述:</p>
 
 </div>
 </div>
@@ -13656,8 +13641,7 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>f. 现在，你一定在考虑其他可能影响用户是否发生转化的因素。讨论为什么考虑将其他因素添加到回归模型中是一个不错的主意。在回归模型中添加附加项有什么弊端吗？</p>
-<p><strong>将更多的变量放入回归模型，可以更加模型的拟合度，让模型能更准确地解释现象。但是，在回归模型中添加附加项也有一些弊端。如果加入的因素不是我们关心的，并且与原来的因素有相关关系，那么就会造成一定的共线性问题，导致回归系数偏离我们的方向，从而影响分析结果</strong></p>
+<p>f. <strong>将更多的变量放入回归模型，可以更加模型的拟合度，让模型能更准确地解释现象。但是，在回归模型中添加附加项也有一些弊端。如果加入的因素不是我们关心的，并且与原来的因素有相关关系，那么就会造成一定的共线性问题，导致回归系数偏离我们的方向，从而影响分析结果</strong></p>
 
 </div>
 </div>
@@ -13666,8 +13650,8 @@ Name: user_id, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>g. 现在，除了测试不同页面的转化率是否会发生变化之外，还要根据用户居住的国家或地区添加一个 effect 项。你需要导入 <strong>countries.csv</strong> 数据集，并将数据集合并在适当的行上。 <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.join.html">这里</a> 是链接表格的文档。</p>
-<p>这个国家项对转化有影响吗？不要忘记为这些国家的列创建虚拟变量—— <strong>提示: 你将需要为这三个虚拟变量增加两列。</strong> 提供统计输出，并书面回答这个问题。</p>
+<p>g. 现在，除了测试不同页面的转化率是否会发生变化之外，还要根据用户居住的国家或地区添加一个 effect 项。需要导入 <strong>countries.csv</strong> 数据集，并将数据集合并在适当的行上。 <a href="https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.join.html">这里</a> 是链接表格的文档。<br>
+查看这个国家项对转化是否有影响。不要忘记为这些国家的列创建虚拟变量—— <strong>提示: 需要为这三个虚拟变量增加两列。</strong></p>
 
 </div>
 </div>
@@ -14140,8 +14124,7 @@ Name: country, dtype: int64</pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>h. 虽然你现在已经查看了国家与页面在转化率上的个体性因素，但现在我们要查看页面与国家/地区之间的相互作用，测试其是否会对转化产生重大影响。创建必要的附加列，并拟合一个新的模型。</p>
-<p>提供你的摘要结果，以及根据结果得出的结论。</p>
+<p>h. 虽然已经查看了国家与页面在转化率上的个体性因素，但现在我们要查看页面与国家/地区之间的相互作用，测试其是否会对转化产生重大影响。创建必要的附加列，并拟合一个新的模型。</p>
 <p><strong>提示：页面与国家/地区的相互作用</strong></p>
 
 <pre><code>df3['new_CA'] = df3['new_page'] * df3['CA']
@@ -14418,20 +14401,6 @@ df3['new_UK'] = df3['new_page'] * df3['UK']</code></pre>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>根据上述A/B测试结果，如果不考虑时间因素，新旧页面的转化率没有显著差异，即新页面不会带来更大的转化率，也不会使得转化率下降。存在这样一种可能，即新页面能增加新用户的转化率，但是对于一部分老用户来说，他们对界面的不适应，可能使得他们的转化率减少。因此，两者对转化率的作用相互抵消，使得从综合结果看，新页面没有展现出转化率方面的优势。如果这个假设存在，那么随着老用户逐渐适应新的页面，转化率可能会进一步提升。当然，这需要进一步考虑时间这一因素后再作出确切的推断。总的来说，从当前数据来看，虽然新旧页面带来的转换率没有差别，但是新页面可能比老页面更有发展潜力。因此，我们推荐这家电商发布新页面。</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a id='conclusions'></a></p>
-<h2 id="&#24635;&#32467;">&#24635;&#32467;<a class="anchor-link" href="#&#24635;&#32467;">&#182;</a></h2><p>祝贺你顺利完成了该项目！</p>
-<h3 id="&#25910;&#38598;&#25552;&#20132;&#26448;&#26009;">&#25910;&#38598;&#25552;&#20132;&#26448;&#26009;<a class="anchor-link" href="#&#25910;&#38598;&#25552;&#20132;&#26448;&#26009;">&#182;</a></h3><p>你对你的 notebook 的状态感到满意后，应该将其保存为便于其他人阅读并查看的格式。你可以使用 <strong>File -&gt; Download as -&gt; HTML (.html)</strong> 菜单将你的 Notebook 保存为一个 .html 文件。如果你在本地操作，并发现了一个 "找不到模块名称（No module name）" 错误，请打开终端并尝试使用 <code>pip install &lt;module_name&gt;</code> 安装缺少的模块（注：在模块名称中，不要包含 "&lt;" or "&gt;" 或任何带有期限的词汇）。</p>
-<p>你需要同时提交原始 Notebook 和 Notebook 的HTML或PDF副本以供审阅。你不需要在提交中附带任何数据文件。如果你参考了其他网站、书籍和其他资源来帮助你解决项目中的任务，请确保记录在案。建议你在 Notebook报告末尾的 Markdown 单元格中添加 “Resources” 部分，或者可以附带一个记录你的参考资源的 <code>readme.txt</code> 文件。</p>
-<h3 id="&#25552;&#20132;&#39033;&#30446;">&#25552;&#20132;&#39033;&#30446;<a class="anchor-link" href="#&#25552;&#20132;&#39033;&#30446;">&#182;</a></h3><p>准备就绪后，点击“提交项目”按钮进入项目提交页面。你可以将文件以 .zip压缩文件提交，也可以链接到包含项目文件的 GitHub 存储库。如果你使用的是 GitHub，请注意，你提交的内容将是提交时的链接库的一个快照。建议你将每个项目保存在一个单独的存储库中，以避免出现混淆：如果审阅专家获取多个文件夹来代表多个项目，则他可能不明确要评估哪个项目。</p>
-<p>我们需要一周的时间对项目进行评分，但在大多数情况下，速度要快得多。当你的提交被审阅后，你将会收到一封电子邮件。如果你在提交项目时遇到任何问题，或者想要查看提交状态，请发送电子邮件至 support@youdaxue.com。同时，你可以继续学习下一个单元的课程。</p>
 
 </div>
 </div>
